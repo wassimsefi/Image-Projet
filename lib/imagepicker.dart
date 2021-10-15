@@ -18,9 +18,10 @@ class _ProfileTabState extends State<ProfileTab> {
 
   Future getImage(ImageSource source) async {
     final pickedFile = await picker.getImage(source: source);
-
     setState(() {
       if (pickedFile != null) {
+        print("object1111111111111111111" + pickedFile.path);
+
         _image = File(pickedFile.path);
 
         setState(() {
@@ -34,23 +35,24 @@ class _ProfileTabState extends State<ProfileTab> {
 
   @override
   Widget build(BuildContext context) {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Image "),
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
+        width: w,
+        height: h,
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
             GestureDetector(
-              child: CircleAvatar(
-                radius: 80,
-                backgroundImage: _image.path == "not yet"
-                    ? const NetworkImage(
-                            "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png")
-                        as ImageProvider
-                    : FileImage(_image),
+              child: Container(
+                width: 40,
+                height: 40,
+                child: Image.asset("assets/upload-image.png"),
               ),
               onTap: () {
                 showModalBottomSheet(
@@ -81,18 +83,79 @@ class _ProfileTabState extends State<ProfileTab> {
                     });
               },
             ),
-            Container(
-                height: 250,
-                padding: const EdgeInsets.all(0),
-                child: _image.path == "not yet"
-                    ? const Text("not yet !!!!")
-                    : Container(
-                        color: Colors.amberAccent,
-                        child: Image.file(
-                          _pickedIamages,
-                          fit: BoxFit.cover,
-                        ),
-                      ))
+            Center(
+                child: Column(children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue.shade400),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Table(
+                        border: TableBorder.symmetric(
+                            inside: BorderSide(color: Colors.blue.shade400)),
+                        children: [
+                          TableRow(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.shade100,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10.0))),
+                              children: [
+                                Container(
+                                    height: 30.0,
+                                    child: Center(child: Text('Image floue ')))
+                              ]),
+                          TableRow(children: [
+                            Container(
+                                height: (h - 270) / 2,
+                                padding: const EdgeInsets.all(0),
+                                child: _image.path == "not yet"
+                                    ? Center(
+                                        child: const Text(
+                                            "cliquer sur l'icone de l'upload au dessus ."))
+                                    : Container(
+                                        color: Colors.amberAccent,
+                                        child: Image.file(
+                                          _pickedIamages,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )),
+                          ]),
+                          TableRow(
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.shade100,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10.0))),
+                              children: [
+                                Container(
+                                    height: 30.0,
+                                    child: Center(child: Text('Image claire')))
+                              ]),
+                          TableRow(children: [
+                            Container(
+                                height: (h - 270) / 2,
+                                padding: const EdgeInsets.all(0),
+                                child: _image.path == "not yet"
+                                    ? Center(child: const Text("not yet !!!!"))
+                                    : Container(
+                                        color: Colors.amberAccent,
+                                        child: Image.file(
+                                          _pickedIamages,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )),
+                          ]),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ])),
           ],
         ),
       ),
