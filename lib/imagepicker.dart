@@ -17,6 +17,7 @@ class _ProfileTabState extends State<ProfileTab> {
   final picker = ImagePicker();
 
   Future getImage(ImageSource source) async {
+    // ignore: deprecated_member_use
     final pickedFile = await picker.getImage(source: source);
     setState(() {
       if (pickedFile != null) {
@@ -40,7 +41,7 @@ class _ProfileTabState extends State<ProfileTab> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Image "),
+        title: const Text("Rends ta photo parfaite  ! "),
       ),
       body: Container(
         width: w,
@@ -62,16 +63,16 @@ class _ProfileTabState extends State<ProfileTab> {
                         padding: const EdgeInsets.all(0),
                         child: Wrap(
                           children: <Widget>[
-                            ListTile(
+                           /* ListTile(
                                 leading: const Icon(Icons.camera),
                                 title: const Text('Camera'),
                                 onTap: () {
                                   getImage(ImageSource.camera);
                                   Navigator.pop(context);
-                                }),
+                                }),*/
                             ListTile(
                               leading: const Icon(Icons.image),
-                              title: const Text('Gallery'),
+                              title: const Text('Gallerie'),
                               onTap: () {
                                 getImage(ImageSource.gallery);
                                 Navigator.pop(context);
@@ -88,7 +89,7 @@ class _ProfileTabState extends State<ProfileTab> {
               Container(
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue.shade400),
+                  border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Row(
@@ -97,17 +98,17 @@ class _ProfileTabState extends State<ProfileTab> {
                     Expanded(
                       child: Table(
                         border: TableBorder.symmetric(
-                            inside: BorderSide(color: Colors.blue.shade400)),
+                            inside: BorderSide(color: Colors.black)),
                         children: [
                           TableRow(
                               decoration: BoxDecoration(
-                                  color: Colors.blue.shade100,
+                                  color: Colors.grey,
                                   borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(10.0))),
                               children: [
                                 Container(
                                     height: 30.0,
-                                    child: Center(child: Text('Image floue ')))
+                                    child: Center(child: Text(' Image  réelle ')))
                               ]),
                           TableRow(children: [
                             Container(
@@ -127,13 +128,13 @@ class _ProfileTabState extends State<ProfileTab> {
                           ]),
                           TableRow(
                               decoration: BoxDecoration(
-                                  color: Colors.blue.shade100,
+                                  color: Colors.grey,
                                   borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(10.0))),
                               children: [
                                 Container(
                                     height: 30.0,
-                                    child: Center(child: Text('Image claire')))
+                                    child: Center(child: Text('nouvelle image ')))
                               ]),
                           TableRow(children: [
                             Container(
